@@ -53,7 +53,7 @@ def payload_report(self, params, packet):
 
 
 
-def on_connect(self):
+def on_connect():
     myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
     myMQTTClient.configureEndpoint("a2coyrat7ns928-ats.iot.us-west-2.amazonaws.com", 8883)
     path = '/home/pi/ee250_final_project'
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     time.sleep(1)
     while (True):
 
-        x, y, z = read_data(self)
+        x, y, z = read_data()
 
         #publish a float
         AWSIoTMQTTClient.publish("rpi-mahjoub/acc", x)
