@@ -51,8 +51,7 @@ def payload_report(self, params, packet):
     print("-----------------------")
     
 
-
-
+'''
 def on_connect():
     myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
     myMQTTClient.configureEndpoint("a2coyrat7ns928-ats.iot.us-west-2.amazonaws.com", 8883)
@@ -68,11 +67,24 @@ def on_connect():
     myMQTTClient.connect()
     myMQTTClient.subscribe("home/acc_value", 1, payload_report)
 
-
+'''
 if __name__ == '__main__':
 
     #attach the on_connect() callback function defined above to the mqtt client
-    AWSIoTMQTTClient.on_connect = on_connect
+    #AWSIoTMQTTClient.on_connect = on_connect
+    myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
+    myMQTTClient.configureEndpoint("a2coyrat7ns928-ats.iot.us-west-2.amazonaws.com", 8883)
+    path = '/home/pi/ee250_final_project'
+    myMQTTClient.configureCredentials("{}root-ca.pem".format(path), "{}cloud.pem.key".format(path), "{}cloud.pem.crt".format(path))
+
+
+    myMQTTClient.configureOfflinePublishQueueing(-1) # Infinite offline Publish queueing
+    myMQTTClient.configureDrainingFrequency(2) # Draining: 2 Hz
+    myMQTTClient.configureConnectDisconnectTimeout(10) # 10 sec
+    myMQTTClient.configureMQTTOperationTimeout(5) # 5 sec
+
+    myMQTTClient.connect()
+    myMQTTClient.subscribe("home/acc_value", 1, payload_report)
     
     
     time.sleep(1)
