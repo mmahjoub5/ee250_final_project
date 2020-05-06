@@ -15,17 +15,6 @@ else:
     int1 = digitalio.DigitalInOut(board.D6)  # Set to correct pin for interrupt!
     lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
 
-# Hardware SPI setup:
-# spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
-# cs = digitalio.DigitalInOut(board.D5)  # Set to correct CS pin!
-# int1 = digitalio.DigitalInOut(board.D6)  # Set to correct pin for interrupt!
-# lis3dh = adafruit_lis3dh.LIS3DH_SPI(spi, cs, int1=int1)
-
-# PyGamer I2C Setup:
-# i2c = busio.I2C(board.SCL, board.SDA)
-# int1 = digitalio.DigitalInOut(board.ACCELEROMETER_INTERRUPT)
-# lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, address=0x19, int1=int1)
-
 
 # Set range of accelerometer (can be RANGE_2_G, RANGE_4_G, RANGE_8_G or RANGE_16_G).
 lis3dh.range = adafruit_lis3dh.RANGE_2_G
@@ -39,4 +28,6 @@ while True:
     ]
     print("x = %0.3f G, y = %0.3f G, z = %0.3f G" % (x, y, z))
     # Small delay to keep things responsive but give time for interrupt processing.
+    if lis3dh.shake(shake_threshold=15):
+        print("Shaken!")
     time.sleep(0.1)
