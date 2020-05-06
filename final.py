@@ -81,9 +81,9 @@ if __name__ == '__main__':
         x, y, z = read_data()
 
         #publish a float
-        AWSIoTMQTTClient.publish("rpi-mahjoub/acc", str(x),0)
-        AWSIoTMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
-        AWSIoTMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
+        myMQTTClient.publish("rpi-mahjoub/acc", str(x),0)
+        myMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
+        myMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
 
         time.sleep(1)
 
