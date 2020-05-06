@@ -8,7 +8,7 @@ import logging
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient 
 
 select = 0
-def read_data(self):
+def read_data():
     # Hardware I2C setup. Use the CircuitPlayground built-in accelerometer if available;
     # otherwise check I2C pins.
     if hasattr(board, "ACCELEROMETER_SCL"):
