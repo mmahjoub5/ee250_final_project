@@ -31,7 +31,7 @@ def read_data():
     x, y, z = [
          value / adafruit_lis3dh.STANDARD_GRAVITY for value in lis3dh.acceleration
     ]
-    print("x = %0.3f G, y = %0.3f G, z = %0.3f G" % (x, y, z))
+    #print("x = %0.3f G, y = %0.3f G, z = %0.3f G" % (x, y, z))
     # Sall delay to keep things responsive but give time for interrupt processing.
     if lis3dh.shake(shake_threshold=15):
         print("Shaken!")
