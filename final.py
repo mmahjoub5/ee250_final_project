@@ -104,7 +104,7 @@ if __name__ == '__main__':
         y_avg  = mean[1]
         z_avg  = mean[2]
 
-        print (x_avg,y_avg,z_avg)
+        #print (x_avg,y_avg,z_avg)
 
         
    
