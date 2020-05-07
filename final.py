@@ -68,28 +68,9 @@ def data_processing(x_array,y_array ,z_array):
 
     return median,mean
     
-def graph_real_time_data(x_avg,xs):
-    #Limit x and y lists to 20 items
-    xs = xs[-20:]
-    ys = ys[-20:]
 
-    # Draw x and y lists
-    ax.clear()
-    ax.plot(xs, ys)
-
-    # Format plot
-    plt.xticks(rotation=45, ha='right')
-    plt.subplots_adjust(bottom=0.30)
-    plt.title('TMP102 Temperature over Time')
-    plt.ylabel('Temperature (deg C)')
-
-# Set up plot to call animate() function periodically
-ani = animation.FuncAnimation(fig, animate, fargs=(xs, ys), interval=1000)
-plt.show()
-
-
-def pub_sub(command):
-    '''
+def pub_sub(x_avg,y_avg,z_avg):
+    
     #attach the on_connect() callback function defined above to the mqtt client
     #AWSIoTMQTTClient.on_connect = on_connect
     myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
@@ -107,53 +88,28 @@ def pub_sub(command):
     myMQTTClient.subscribe("home/acc_value", 1, payload_report)
 
     #publish a float
-    #myMQTTClient.publish("rpi-mahjoub/acc", str(x,y,z),0)
+    myMQTTClient.publish("rpi-mahjoub/acc", str(x_avg,y_avg,z_avg),0)
     #myMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
     #myMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
 
-    '''
 if __name__ == '__main__':
-    '''
-    #attach the on_connect() callback function defined above to the mqtt client
-    #AWSIoTMQTTClient.on_connect = on_connect
-    myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
-    myMQTTClient.configureEndpoint("a2coyrat7ns928-ats.iot.us-west-2.amazonaws.com", 8883)
-    path = '/home/pi/ee250_final_project/'
-    myMQTTClient.configureCredentials("{}root-ca.pem".format(path), "{}cloud.pem.key".format(path), "{}cloud.pem.crt".format(path))
-
-
-    myMQTTClient.configureOfflinePublishQueueing(-1) # Infinite offline Publish queueing
-    myMQTTClient.configureDrainingFrequency(2) # Draining: 2 Hz
-    myMQTTClient.configureConnectDisconnectTimeout(10) # 10 sec
-    myMQTTClient.configureMQTTOperationTimeout(5) # 5 sec
-
-    myMQTTClient.connect()
-    myMQTTClient.subscribe("home/acc_value", 1, payload_report)
-    '''
     
     time.sleep(1)
     while (True):
-
         
         x, y, z = read_data()
         median, mean = data_processing(x_array,y_array ,z_array)
 
-        x_avg.append(np.mean(0)) 
-        y_avg.append(np.mean(1))
-        z_avg.append(np.mean(2))
+        x_avg = (np.mean(0)) 
+        y_avg  = (np.mean(1))
+        z_avg  = (np.mean(2))
 
-        #publish a float
-        #myMQTTClient.publish("rpi-mahjoub/acc", str(x,y,z),0)
-        #myMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
-        #myMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
-        # Set up plot to call animate() function periodically
+        print (x_avg,y_avg,z_avg)
+
+        
    
-        xs.append(dt.datetime.now().strftime('%H:%M:%S.%f'))
-        # Limit x and y lists to 20 items
         
         time.sleep(0.25)
-    ani = animation.FuncAnimation(fig,graph_real_time_data, fargs=(xs, x_avg), interval=1000)
-    plt.show()
 
 
 
