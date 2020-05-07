@@ -41,9 +41,10 @@ def read_data():
     x_array.append(x)
     y_array.append(y)
     z_array.append(z)
+    print(x)
     print(x_array)
-    print(y_array)
-    print(z_array)
+    #print(y_array)
+    #print(z_array)
 
 
 
@@ -70,8 +71,8 @@ def payload_report(self, params, packet):
 def data_processing(x_array,y_array ,z_array):
     median= ([np.median(x_array),np.median(y_array),np.median(z_array)])
     mean = ([np.mean(x_array),np.mean(y_array),np.mean(z_array)])
-    print(mean)
-    print(median)
+    #print(mean)
+    #print(median)
 
     return median,mean
     
@@ -98,7 +99,7 @@ if __name__ == '__main__':
     while (True):
 
         x, y, z = read_data()
-        print(data_processing(x_array,y_array ,z_array))
+        median, mean = data_processing(x_array,y_array ,z_array)
         #publish a float
         #myMQTTClient.publish("rpi-mahjoub/acc", str(x,y,z),0)
         #myMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
