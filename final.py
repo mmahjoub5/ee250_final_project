@@ -4,10 +4,16 @@ import digitalio
 import busio
 import adafruit_lis3dh
 import logging 
+import numpy as np 
+import matplotlib as plt 
+
 
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient 
 
 select = 0
+x_array = []
+y_array = []
+z_array = []
 def read_data():
     # Hardware I2C setup. Use the CircuitPlayground built-in accelerometer if available;
     # otherwise check I2C pins.
@@ -31,6 +37,14 @@ def read_data():
     x, y, z = [
          value / adafruit_lis3dh.STANDARD_GRAVITY for value in lis3dh.acceleration
     ]
+    
+    x_array.append(x)
+    y_array.append(y)
+    z_array.append(z)
+
+
+
+
     #print("x = %0.3f G, y = %0.3f G, z = %0.3f G" % (x, y, z))
     # Sall delay to keep things responsive but give time for interrupt processing.
     if lis3dh.shake(shake_threshold=15):
@@ -50,24 +64,12 @@ def payload_report(self, params, packet):
     print("Message: ", packet.payload)
     print("-----------------------")
     
+def data_processing(x_array,y_array ,z_array):
+    np.array(median)= ([np.median(x_array),np.median(y_array),np.median(z_array)])
+    np.array(mean) = ([np.mean(x_array),np.mean(y_array),np.mean(z_array)])
 
-'''
-def on_connect():
-    myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
-    myMQTTClient.configureEndpoint("a2coyrat7ns928-ats.iot.us-west-2.amazonaws.com", 8883)
-    path = '/home/pi/ee250_final_project'
-    myMQTTClient.configureCredentials("{}root-ca.pem".format(path), "{}cloud.pem.key".format(path), "{}cloud.pem.crt".format(path))
-
-
-    myMQTTClient.configureOfflinePublishQueueing(-1) # Infinite offline Publish queueing
-    myMQTTClient.configureDrainingFrequency(2) # Draining: 2 Hz
-    myMQTTClient.configureConnectDisconnectTimeout(10) # 10 sec
-    myMQTTClient.configureMQTTOperationTimeout(5) # 5 sec
-
-    myMQTTClient.connect()
-    myMQTTClient.subscribe("home/acc_value", 1, payload_report)
-
-'''
+    return median,mean
+    
 if __name__ == '__main__':
 
     #attach the on_connect() callback function defined above to the mqtt client
@@ -93,9 +95,9 @@ if __name__ == '__main__':
         x, y, z = read_data()
 
         #publish a float
-        myMQTTClient.publish("rpi-mahjoub/acc", str(x),0)
-        myMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
-        myMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
+        myMQTTClient.publish("rpi-mahjoub/acc", str(x,y,z),0)
+        #myMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
+        #myMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
 
         time.sleep(1)
 
