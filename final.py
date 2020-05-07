@@ -115,11 +115,11 @@ if __name__ == '__main__':
         #myMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
         
         
-
+        '''
         x_avg = mean[0]
         y_avg  = mean[1]
         z_avg  = mean[2]
-
+        '''
         #print (x_avg,y_avg,z_avg)
 
         
