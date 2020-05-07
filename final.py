@@ -41,8 +41,8 @@ def read_data():
     x_array.append(x)
     y_array.append(y)
     z_array.append(z)
-    print(x)
-    print(x_array)
+    #print(x)
+    #print(x_array)
     #print(y_array)
     #print(z_array)
 
@@ -72,7 +72,7 @@ def data_processing(x_array,y_array ,z_array):
     median= ([np.median(x_array),np.median(y_array),np.median(z_array)])
     mean = ([np.mean(x_array),np.mean(y_array),np.mean(z_array)])
     #print(mean)
-    #print(median)
+    print(median)
 
     return median,mean
     
