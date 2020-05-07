@@ -47,11 +47,6 @@ def read_data():
     z_array.append(z)
     
 
-
-
-
-    
-    
     return x,y,z
 
 def payload_report(self, params, packet):
@@ -96,9 +91,30 @@ if __name__ == '__main__':
     
     time.sleep(1)
     while (True):
-        
+
         x, y, z = read_data()
-        median, mean = data_processing(x_array,y_array ,z_array)
+            #attach the on_connect() callback function defined above to the mqtt client
+        #AWSIoTMQTTClient.on_connect = on_connect
+        myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
+        myMQTTClient.configureEndpoint("a2coyrat7ns928-ats.iot.us-west-2.amazonaws.com", 8883)
+        path = '/home/pi/ee250_final_project/'
+        myMQTTClient.configureCredentials("{}root-ca.pem".format(path), "{}cloud.pem.key".format(path), "{}cloud.pem.crt".format(path))
+
+
+        myMQTTClient.configureOfflinePublishQueueing(-1) # Infinite offline Publish queueing
+        myMQTTClient.configureDrainingFrequency(2) # Draining: 2 Hz
+        myMQTTClient.configureConnectDisconnectTimeout(10) # 10 sec
+        myMQTTClient.configureMQTTOperationTimeout(5) # 5 sec
+
+        myMQTTClient.connect()
+        myMQTTClient.subscribe("rpi-mahjoub/acc", 1, payload_report)
+
+        #publish a float
+        myMQTTClient.publish("rpi-mahjoub/acc", str(x),0)
+        #myMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
+        #myMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
+        
+        
 
         x_avg = mean[0]
         y_avg  = mean[1]
