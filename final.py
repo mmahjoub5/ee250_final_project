@@ -152,9 +152,8 @@ if __name__ == '__main__':
         # Limit x and y lists to 20 items
         
         time.sleep(0.25)
-
-     ani = animation.FuncAnimation(fig,graph_real_time_data, fargs=(xs, x_avg), interval=1000)
-     plt.show()
+    ani = animation.FuncAnimation(fig,graph_real_time_data, fargs=(xs, x_avg), interval=1000)
+    plt.show()
 
 
 
