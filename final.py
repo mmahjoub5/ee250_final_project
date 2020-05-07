@@ -63,7 +63,7 @@ def payload_report(self, params, packet):
 def data_processing(x_array,y_array ,z_array):
     median= ([np.median(x_array),np.median(y_array),np.median(z_array)])
     mean = ([np.mean(x_array),np.mean(y_array),np.mean(z_array)])
-    #print(mean)
+    print(mean)
     
 
     return median,mean
@@ -104,7 +104,7 @@ if __name__ == '__main__':
         y_avg  = (np.mean(1))
         z_avg  = (np.mean(2))
 
-        print (x_avg,y_avg,z_avg)
+        #print (x_avg,y_avg,z_avg)
 
         
    
