@@ -93,6 +93,7 @@ if __name__ == '__main__':
     while (True):
 
         x, y, z = read_data()
+        '''
             #attach the on_connect() callback function defined above to the mqtt client
         #AWSIoTMQTTClient.on_connect = on_connect
         myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
@@ -107,7 +108,7 @@ if __name__ == '__main__':
         myMQTTClient.configureMQTTOperationTimeout(5) # 5 sec
 
         myMQTTClient.connect()
-        #myMQTTClient.subscribe("rpi-mahjoub/acc", 1, payload_report)
+        myMQTTClient.subscribe("rpi-mahjoub/acc", 1, payload_report)
 
         #publish a float
         myMQTTClient.publish("rpi-mahjoub/acc", str(x),0)
