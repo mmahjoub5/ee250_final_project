@@ -69,7 +69,7 @@ def data_processing(x_array,y_array ,z_array):
     return median,mean
     
 
-def pub_sub(x_avg,y_avg,z_avg):
+def pub_sub(x_avg,y_avg,z_avg,x):
     
     #attach the on_connect() callback function defined above to the mqtt client
     #AWSIoTMQTTClient.on_connect = on_connect
@@ -88,7 +88,7 @@ def pub_sub(x_avg,y_avg,z_avg):
     myMQTTClient.subscribe("rpi-mahjoub/acc", 1, payload_report)
 
     #publish a float
-    myMQTTClient.publish("rpi-mahjoub/acc", "hello",0)
+    myMQTTClient.publish("rpi-mahjoub/acc", str(x),0)
     #myMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
     #myMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
 
