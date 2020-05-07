@@ -85,7 +85,7 @@ def pub_sub(x_avg,y_avg,z_avg):
     myMQTTClient.configureMQTTOperationTimeout(5) # 5 sec
 
     myMQTTClient.connect()
-    myMQTTClient.subscribe("home/acc_value", 1, payload_report)
+    myMQTTClient.subscribe("rpi-mahjoub/acc", 1, payload_report)
 
     #publish a float
     myMQTTClient.publish("rpi-mahjoub/acc", "hello",0)
