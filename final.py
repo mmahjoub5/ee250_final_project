@@ -41,6 +41,9 @@ def read_data():
     x_array.append(x)
     y_array.append(y)
     z_array.append(z)
+    print(x_array)
+    print(y_array)
+    print(z_array)
 
 
 
@@ -67,11 +70,13 @@ def payload_report(self, params, packet):
 def data_processing(x_array,y_array ,z_array):
     median= ([np.median(x_array),np.median(y_array),np.median(z_array)])
     mean = ([np.mean(x_array),np.mean(y_array),np.mean(z_array)])
+    print(mean)
+    print(median)
 
     return median,mean
     
 if __name__ == '__main__':
-
+    '''
     #attach the on_connect() callback function defined above to the mqtt client
     #AWSIoTMQTTClient.on_connect = on_connect
     myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
@@ -87,15 +92,15 @@ if __name__ == '__main__':
 
     myMQTTClient.connect()
     myMQTTClient.subscribe("home/acc_value", 1, payload_report)
-    
+    '''
     
     time.sleep(1)
     while (True):
 
         x, y, z = read_data()
-
+        print(data_processing(x_array,y_array ,z_array))
         #publish a float
-        myMQTTClient.publish("rpi-mahjoub/acc", str(x,y,z),0)
+        #myMQTTClient.publish("rpi-mahjoub/acc", str(x,y,z),0)
         #myMQTTClient.publish("rpi-mahjoub/acc", str(y) , 0)
         #myMQTTClient.publish("rpi-mahjoub/acc", str(z), 0)
 
