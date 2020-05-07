@@ -5,7 +5,7 @@ import busio
 import adafruit_lis3dh
 import logging 
 import numpy as np 
-import matplotlib as plt 
+#import matplotlib as plt 
 
 
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient 
