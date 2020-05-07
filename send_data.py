@@ -12,7 +12,7 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 # You can generate a Token from the "Tokens Tab" in the UI
 token = "Abj-wu1yWUh_ikwiQMDBA8Z0X_-wJfHeuk3LxS9Tgl70hJzPMfeSSjVJYDTcN1HK9wH3EMgXMumMRjNvDgw6Ew=="
 org = "7256ca2ad5deacce"
-bucket = "Abj-wu1yWUh_ikwiQMDBA8Z0X_-wJfHeuk3LxS9Tgl70hJzPMfeSSjVJYDTcN1HK9wH3EMgXMumMRjNvDgw6Ew=="
+bucket = "mahjoub's Bucket"
 
 client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token)
 
