@@ -100,9 +100,9 @@ if __name__ == '__main__':
         x, y, z = read_data()
         median, mean = data_processing(x_array,y_array ,z_array)
 
-        x_avg = (np.mean(0)) 
-        y_avg  = (np.mean(1))
-        z_avg  = (np.mean(2))
+        x_avg = mean[0]
+        y_avg  = mean[1]
+        z_avg  = mean[2]
 
         print (x_avg,y_avg,z_avg)
 
