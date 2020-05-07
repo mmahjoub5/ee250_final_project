@@ -96,7 +96,7 @@ if __name__ == '__main__':
             #attach the on_connect() callback function defined above to the mqtt client
         #AWSIoTMQTTClient.on_connect = on_connect
         myMQTTClient = AWSIoTMQTTClient("raspberryPiHome")
-        myMQTTClient.configureEndpoint("a2coyrat7ns928-ats.iot.us-west-2.amazonaws.com", 8883)
+        myMQTTClient.configureEndpoint("a2coyrat7ns928-ats.iot.us-east-1.amazonaws.com", 8883)
         path = '/home/pi/ee250_final_project/'
         myMQTTClient.configureCredentials("{}root-ca.pem".format(path), "{}cloud.pem.key".format(path), "{}cloud.pem.crt".format(path))
 
