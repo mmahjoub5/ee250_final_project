@@ -98,7 +98,7 @@ if __name__ == '__main__':
     while (True):
         
         x, y, z = read_data()
-        median, mean = data_processing(x_array,y_array ,z_array,5)
+        median, mean = data_processing(x_array,y_array ,z_array)
 
         x_avg = mean[0]
         y_avg  = mean[1]
@@ -108,7 +108,7 @@ if __name__ == '__main__':
 
         
    
-        pub_sub(x_avg,y_avg,z_avg)
+        pub_sub(x_avg,y_avg,z_avg,5)
         time.sleep(0.25)
 
 
