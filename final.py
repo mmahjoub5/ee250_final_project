@@ -108,7 +108,7 @@ if __name__ == '__main__':
 
         
    
-        
+        pub_sub(x_avg,y_avg,z_avg)
         time.sleep(0.25)
 
 
