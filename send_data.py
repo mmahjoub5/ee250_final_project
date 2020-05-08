@@ -104,7 +104,7 @@ def send_data_tcp(mean,median):
     s.connect((TCP_IP, TCP_PORT))
     
 
-    message = str(median[index])
+    message = str(median)
     message1 = str(median[index])
     s.send(message.encode())
 
@@ -123,13 +123,13 @@ def send_data_tcp(mean,median):
     s.close()
     
     index = index +1 
-    if (index == 3):
+    if (index == 4):
         index = 1
     
 #this function takes in the x,y,z numpy arrays and finds the median and mean values 
 def data_processing(x_array,y_array ,z_array):
-    median= ([np.median(x_array),np.median(y_array),np.median(z_array)])
-    mean = ([np.mean(x_array),np.mean(y_array),np.mean(z_array)])
+    median= np.median(x_array)
+    mean = np.mean(x_array)
     
     return median,mean
 
