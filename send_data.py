@@ -83,7 +83,7 @@ def send_data_api(x,y,z):
 
     write_api = client.write_api(write_options=SYNCHRONOUS)
 
-    data = "mem,host=host1 used_percent=23.43234543"
+    data = "mem" + str(x) + "host=host1 used_percent="
     write_api.write(bucket, org, data)
     query = f'from(bucket: \"{bucket}\") |> range(start: -1h)'
     tables = client.query_api().query(query, org=org)
