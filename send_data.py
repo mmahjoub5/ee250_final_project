@@ -106,7 +106,7 @@ def send_data_tcp(mean,median):
     s.send(message.encode())
 
     #s.send(message1.encode())
-    data_recieved  = s.recv(buffer_size)=
+    data_recieved  = s.recv(buffer_size)
     if (data_recieved is not None):
         GPIO.output(LED,GPIO.HIGH)
     
