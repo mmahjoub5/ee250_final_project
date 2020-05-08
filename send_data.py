@@ -127,7 +127,7 @@ def data_processing(x_array,y_array ,z_array):
 
 
 def main():
-    while (true):
+    while (True):
         #read in data from sensors
         x,y,z = read_data()
 
