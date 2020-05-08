@@ -137,17 +137,18 @@ def data_processing(x_array,y_array ,z_array):
 
 
 def main():
-    #read in data from sensors
-    x,y,z = read_data()
+    while (true):
+        #read in data from sensors
+        x,y,z = read_data()
 
-    #send the data to influxdb 
-    send_data_api(x,y,z)
+        #send the data to influxdb 
+        send_data_api(x,y,z)
 
     #process the data 
-    median , mean = data_processing(x_array,y_array ,z_array)
+    #median , mean = data_processing(x_array,y_array ,z_array)
 
     #send data to EC2 instance
-    send_data_tcp(mean,median)
+    #send_data_tcp(mean,median)
 
 
 
