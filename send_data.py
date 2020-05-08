@@ -25,14 +25,14 @@ import socket
 TCP_IP = '54.85.182.93' #LOCAL IP of EC2 Instance
 TCP_PORT =  5015
 buffer_size= 1024
-
+LED =16
 x_array = []
 y_array = []
 z_array = []
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(12,GPIO.OUT)
+GPIO.setup(LED,GPIO.OUT)
 index = 1 
 
 #this function reads data from the sensor and appends the values to an numpy array so they can be avergaged 
@@ -104,7 +104,7 @@ def send_data_tcp(mean,median):
     s.connect((TCP_IP, TCP_PORT))
     
 
-    message = "hello"
+    message = str(median[index])
     message1 = str(median[index])
     s.send(message.encode())
 
@@ -115,17 +115,17 @@ def send_data_tcp(mean,median):
 
     if (data_recieved is not None):
         
-        GPIO.output(12,GPIO.HIGH)
+        GPIO.output(LED,GPIO.HIGH)
     else:
-        GPIO.output(12,GPIO.LOW)
+        GPIO.output(LED,GPIO.LOW)
         
     print(data_recieved.decode())
     s.close()
-    '''
+    
     index = index +1 
     if (index == 3):
         index = 1
-    '''
+    
 #this function takes in the x,y,z numpy arrays and finds the median and mean values 
 def data_processing(x_array,y_array ,z_array):
     median= ([np.median(x_array),np.median(y_array),np.median(z_array)])
