@@ -25,7 +25,7 @@ import RPi.GPIO as GPIO
 TCP_IP = '3.80.246.53' #LOCAL IP of EC2 Instance
 TCP_PORT =  5015
 buffer_size= 1024
-led = 
+
 x_array = []
 y_array = []
 z_array = []
