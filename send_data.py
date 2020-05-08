@@ -104,7 +104,7 @@ def send_data_tcp(mean,median):
     s.connect((TCP_IP, TCP_PORT))
     
 
-    message = str(mean[1])
+    message = "hello"
     message1 = str(median[index])
     s.send(message.encode())
 
@@ -112,6 +112,7 @@ def send_data_tcp(mean,median):
 
 
     data_recieved  = s.recv(buffer_size)
+
     if (data_recieved is not None):
         
         GPIO.output(12,GPIO.HIGH)
