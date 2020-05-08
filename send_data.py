@@ -130,7 +130,7 @@ def data_processing(x_array,y_array ,z_array):
     median_x = np.median(x_array)
     mean_x = np.mean(x_array)
     
-    return median,mean
+    return median_x,mean_x
 
 
 def main():
