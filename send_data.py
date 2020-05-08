@@ -86,7 +86,11 @@ def send_data_api(x,y,z):
     data_x = "mem,host=host1 x_value="+str(x)
     data_y = "mem,host=host1 y_value="+str(y)
     data_z = "mem,host=host1 z_value="+str(z)
-    write_api.write(bucket, org, data)
+    write_api.write(bucket, org, data_x)
+    write_api.write(bucket, org, data_y)
+    write_api.write(bucket, org, data_z)
+
+
     query = f'from(bucket: \"{bucket}\") |> range(start: -1h)'
     tables = client.query_api().query(query, org=org)
 
