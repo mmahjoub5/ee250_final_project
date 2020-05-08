@@ -106,6 +106,7 @@ def send_data_tcp(mean,median):
 
     message = str(median)
     message1 = str(median[index])
+    print(message1)
     s.send(message.encode())
 
     #s.send(message1.encode())
