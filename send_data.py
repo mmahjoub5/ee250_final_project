@@ -115,7 +115,7 @@ def send_data_tcp(mean,median):
     #s.close()
     
     index = index +1 
-    if (index = 3):
+    if (index == 3):
         index = 1
 
 #this function takes in the x,y,z numpy arrays and finds the median and mean values 
