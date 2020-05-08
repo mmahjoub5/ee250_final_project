@@ -33,7 +33,7 @@ z_array = []
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(LED,GPIO.OUT)
-index = 1 
+
 
 #this function reads data from the sensor and appends the values to an numpy array so they can be avergaged 
 # also it returns each  individual  value of x y and z
@@ -99,7 +99,7 @@ def send_data_api(x,y,z):
 #this function sends the median and mean values of x,y,z to an AWS EC2 I set up and  once the data is received and 
 # we recieve a message back from the instance it will turn on an LED on the bread board 
 def send_data_tcp(mean,median):
-
+    index = 1 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((TCP_IP, TCP_PORT))
     
