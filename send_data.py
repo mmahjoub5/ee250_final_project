@@ -22,7 +22,7 @@ import socket
 
 
 
-TCP_IP = '99.68.150.244' #LOCAL IP of EC2 Instance
+TCP_IP = '54.85.182.93' #LOCAL IP of EC2 Instance
 TCP_PORT =  5015
 buffer_size= 1024
 
