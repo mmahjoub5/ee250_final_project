@@ -15,16 +15,6 @@ import adafruit_lis3dh
 import logging 
 import numpy as np 
 import datetime as dt
-import matplotlib.pyplot as plt
-import matplotlib.animation as animationimport time
-import board
-import digitalio
-import busio
-import adafruit_lis3dh
-import logging 
-import numpy as np 
-import datetime as dt
-import matplotlib.pyplot as plt
 import RPi.GPIO as GPIO
 
 
