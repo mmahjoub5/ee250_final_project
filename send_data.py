@@ -130,8 +130,8 @@ def send_data_tcp(mean,median):
     
 #this function takes in the x,y,z numpy arrays and finds the median and mean values 
 def data_processing(x_array,y_array ,z_array):
-    median= np.median(x_array)
-    mean = np.mean(x_array)
+    median_y = np.median(x_array)
+    mean_x = np.mean(x_array)
     
     return median,mean
 
