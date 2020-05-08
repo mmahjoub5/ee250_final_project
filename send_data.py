@@ -119,7 +119,7 @@ def send_data_tcp(mean,median):
         GPIO.output(12,GPIO.LOW)
         
     print(data_recieved.decode())
-    #s.close()
+    s.close()
     '''
     index = index +1 
     if (index == 3):
