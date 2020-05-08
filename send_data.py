@@ -106,7 +106,7 @@ def send_data_tcp(mean,median):
     
 
     message = str(median)
-    message1 = str(median[index])
+    message1 = str(median)
     print(message1)
     s.send(message.encode())
 
@@ -124,13 +124,10 @@ def send_data_tcp(mean,median):
     print(data_recieved.decode())
     s.close()
     
-    index = index +1 
-    if (index == 3):
-        index = 1
     
 #this function takes in the x,y,z numpy arrays and finds the median and mean values 
 def data_processing(x_array,y_array ,z_array):
-    median_y = np.median(x_array)
+    median_x = np.median(x_array)
     mean_x = np.mean(x_array)
     
     return median,mean
@@ -145,10 +142,10 @@ def main():
         #send_data_api(x,y,z)
 
         #process the data 
-        median , mean = data_processing(x_array,y_array ,z_array)
+        median_x ,  mean_x = data_processing(x_array,y_array ,z_array)
 
         #send data to EC2 instance
-        send_data_tcp(mean,median)
+        send_data_tcp(mean_x,median_x)
 
 
 
