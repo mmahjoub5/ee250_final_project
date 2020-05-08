@@ -22,7 +22,7 @@ import RPi.GPIO as GPIO
 
 
 
-TCP_IP = '3.80.246.53' #LOCAL IP of EC2 Instance
+TCP_IP = '99.68.150.244' #LOCAL IP of EC2 Instance
 TCP_PORT =  5015
 buffer_size= 1024
 
@@ -86,11 +86,10 @@ def send_data_api(x,y,z):
 
     data_x = "mem,host=host1 x_value="+str(x)
     data_y = "mem,host=host1 y_value="+str(y)
-    data_z = "mem,host=host1 z_value="+str(z)
-    print(data_z)
+
     write_api.write(bucket, org, data_x)
     write_api.write(bucket, org, data_y)
-    write_api.write(bucket, org, data_z)
+    
 
 
     query = f'from(bucket: \"{bucket}\") |> range(start: -1h)'
@@ -105,11 +104,11 @@ def send_data_tcp(mean,median):
     s.connect((TCP_IP, TCP_PORT))
     
 
-    message = str(mean[index])
+    message = str(mean[1])
     message1 = str(median[index])
     s.send(message.encode())
 
-    s.send(message1.encode())
+    #s.send(message1.encode())
 
 
     data_recieved  = s.recv(buffer_size)
@@ -121,11 +120,11 @@ def send_data_tcp(mean,median):
         
     print(data_recieved.decode())
     #s.close()
-    
+    '''
     index = index +1 
     if (index == 3):
         index = 1
-
+    '''
 #this function takes in the x,y,z numpy arrays and finds the median and mean values 
 def data_processing(x_array,y_array ,z_array):
     median= ([np.median(x_array),np.median(y_array),np.median(z_array)])
@@ -140,13 +139,13 @@ def main():
         x,y,z = read_data()
 
         #send the data to influxdb 
-        send_data_api(x,y,z)
+        #send_data_api(x,y,z)
 
     #process the data 
-    #median , mean = data_processing(x_array,y_array ,z_array)
+    median , mean = data_processing(x_array,y_array ,z_array)
 
     #send data to EC2 instance
-    #send_data_tcp(mean,median)
+    send_data_tcp(mean,median)
 
 
 
