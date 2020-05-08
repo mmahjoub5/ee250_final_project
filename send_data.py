@@ -21,5 +21,18 @@ write_api = client.write_api(write_options=SYNCHRONOUS)
 data = "mem,host=host1 used_percent=23.43234543"
 write_api.write(bucket, org, data)
 
+def read_data():
+    # Hardware I2C setup. Use the CircuitPlayground built-in accelerometer if available;
+    # otherwise check I2C pins.
+    if hasattr(board, "ACCELEROMETER_SCL"):
+        i2c = busio.I2C(board.ACCELEROMETER_SCL, board.ACCELEROMETER_SDA)
+        int1 = digitalio.DigitalInOut(board.ACCELEROMETER_INTERRUPT)
+        lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, address=0x19, int1=int1)
+    else:
+        i2c = busio.I2C(board.SCL, board.SDA)
+        int1 = digitalio.DigitalInOut(board.D6)  # Set to correct pin for interrupt!
+        lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
+
+
 query = f'from(bucket: \"{bucket}\") |> range(start: -1h)'
 tables = client.query_api().query(query, org=org)
