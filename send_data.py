@@ -154,7 +154,7 @@ def main():
 
     
         GPIO.output(LED,GPIO.LOW)
-        delay(1)
+        time.sleep(1)
 if __name__ == '__main__':
     main()
 
