@@ -66,6 +66,7 @@ def read_data():
     y_array.append(y)
     z_array.append(z)
     
+    print(z)
 
     return x,y,z
 
