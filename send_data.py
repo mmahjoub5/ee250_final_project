@@ -53,23 +53,18 @@ def read_data():
     # Set range of accelerometer (can be RANGE_2_G, RANGE_4_G, RANGE_8_G or RANGE_16_G).
     lis3dh.range = adafruit_lis3dh.RANGE_2_G
 
-
-    
     # Read accelerometer values (in m / s ^ 2).  Returns a 3-tuple of x, y,
     # z axis values.  
     x, y, z = [
          value  for value in lis3dh.acceleration
     ]
-
     
     x_array.append(x)
     y_array.append(y)
     z_array.append(z)
-    
 
 
     return x,y,z
-
 
 
 #this function uses the python inflixdb-client api library to send the sensorr  values to the  influxdb cloud to be 
@@ -111,16 +106,10 @@ def send_data_tcp(mean,median):
     s.send(message.encode())
 
     #s.send(message1.encode())
-
-
-    data_recieved  = s.recv(buffer_size)
-
+    data_recieved  = s.recv(buffer_size)=
     if (data_recieved is not None):
-        
         GPIO.output(LED,GPIO.HIGH)
     
-        
-        
     print(data_recieved.decode())
     s.close()
     
@@ -139,7 +128,7 @@ def main():
         x,y,z = read_data()
 
         #send the data to influxdb 
-        #send_data_api(x,y,z)
+        send_data_api(x,y,z)
 
         #process the data 
         median_x ,  mean_x = data_processing(x_array,y_array ,z_array)
@@ -150,9 +139,6 @@ def main():
 
 
   
-
-    
-        
         time.sleep(1)
 if __name__ == '__main__':
     main()
